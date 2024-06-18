@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.himedia.g12.dao.ITransactionDao1">
+    <insert id="insertRecord">
+        insert into transaction1(id, amount) values(#{param1}, #{param2})
+    </insert>
+
+
+
+</mapper>
