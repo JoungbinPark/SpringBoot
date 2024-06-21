@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.himedia.g13.dao.IBoardDao">
+
+    <select id="getAllCount" resultType="_int">
+        select count(*) from board
+    </select>
+
+    <select id="selectBoard" parameterType="com.himedia.g13.dto.Paging" resultType="com.himedia.g13.dto.BoardDto">
+        select * from board order by num desc limit #{displayRow} offset #{startNum}
+    </select>
+
+    <select id="getReplyCount">
+        select count(*) from reply where boardnum=#{param1}
+    </select>
+
+    <insert id="insertBoard" parameterType="com.himedia.g13.dto.BoardDto">
+        insert into board( userid, pass, email, title, content, image, savefilename)
+        values( #{userid}, #{pass}, #{email}, #{title}, #{content}, #{image}, #{savefilename})
+    </insert>
+
+    <update id="plusOneReadcount">
+        update board set readcount = readcount +1 where num=#{param1}
+    </update>
+
+    <select id="getBoard" resultType="com.himedia.g13.dto.BoardDto">
+        select * from board where num=#{param1}
+    </select>
+
+    <select id="selectReply" resultType="com.himedia.g13.dto.ReplyDto">
+        select * from reply where boardnum=#{param1} order by replynum desc
+    </select>
+
+    <insert id="insertReply" parameterType="com.himedia.g13.dto.ReplyDto">
+        insert into reply(boardnum, userid, content)
+        value(#{boardnum}, #{userid}, #{content})
+    </insert>
+
+    <delete id="deleteReply">
+        delete from reply where replynum=#{param1}
+    </delete>
+
+    <update id="updateBoard" parameterType="com.himedia.g13.dto.BoardDto">
+        update board set title=#{title}, content=#{content}, image=#{image}, savefilename=#{savefilename} where num=#{num}
+    </update>
+
+    <delete id="deleteBoard">
+        delete from board where num=#{param1}
+    </delete>
+
+</mapper>

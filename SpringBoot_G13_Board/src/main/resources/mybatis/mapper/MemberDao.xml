@@ -7,4 +7,18 @@
     <select id="getMember" resultType="com.himedia.g13.dto.MemberDto">
         select * from member where userid=#{param1}
     </select>
+
+    <insert id="insertMember" parameterType="com.himedia.g13.dto.MemberDto">
+        insert into member( userid, name, pwd, email, phone, provider)
+        values( #{userid}, #{name}, #{pwd}, #{email}, #{phone}, #{provider})
+    </insert>
+
+    <update id="updateMember" parameterType="com.himedia.g13.dto.MemberDto">
+        update member set name=#{name}, pwd=#{pwd}, email=#{email}, phone=#{phone} where userid=#{userid}
+    </update>
+
+    <delete id="deleteMember">
+        delete from member where userid=#{param1}
+    </delete>
+
 </mapper>

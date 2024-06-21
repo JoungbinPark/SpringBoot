@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.himedia.g14.dao.IOrderDao">
+
+    <insert id="insertOrders" >
+        insert into orders(userid) values(#{param1})
+    </insert>
+
+    <select id="lookupMaxOseq" resultType="_int">
+        select max(oseq) from orders
+    </select>
+
+    <select id="getCart" resultType="com.himedia.g14.dto.CartVO">
+        select * from cart_view where cseq=#{param1}
+    </select>
+
+    <insert id="insertOrderDetail">
+        insert into order_detail(oseq, pseq, quantity)
+        values(#{param1}, #{param2.pseq}, #{param2.quantity})
+    </insert>
+
+    <insert id="insertOrderDetailOne">
+        insert into order_detail(oseq, pseq, quantity)
+        values(#{param1}, #{param2}, #{param3})
+    </insert>
+
+    <select id="getOrderByOseq" resultType="com.himedia.g14.dto.OrderVO">
+        select * from order_view where oseq=#{param1}
+    </select>
+
+    <select id="getOseqListIng" resultType="int">
+        select distinct oseq from order_view where userid=#{param1} and ( result='1' or result='2' or result='3') order by oseq desc
+    </select>
+
+    <select id="getOseqListAll" resultType="int">
+        select distinct oseq from order_view where userid=#{param1} order by oseq desc
+    </select>
+</mapper>
