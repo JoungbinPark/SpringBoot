@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.himedia.g14.dao.ICustomerDao">
+    <select id="getQnaList" resultType="com.himedia.g14.dto.QnaVO">
+        select * from qna order by qseq desc
+    </select>
+
+    <select id="getQna" resultType="com.himedia.g14.dto.QnaVO">
+        select * from qna where qseq=#{param1}
+    </select>
+
+    <insert id="writeQna">
+        insert into qna( userid, subject, content, security, pass)
+        values(#{param1}, #{param2}, #{param3}, #{param4}, #{param5})
+    </insert>
+
+</mapper>
